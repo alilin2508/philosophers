@@ -1,17 +1,45 @@
 #include "philo_one.h"
 
-int ft_error(int err_nb)
+int	clear(t_option *state)
 {
-	if (err_nb == 0)
-		write(2, "Error: wrong number of arguments\n", 33);
-	if (err_nb == 1)
-		write(2, "Error: wrong type of argument\n", 31);
-	if (err_nb == 2)
-		write(2, "Error: negative argument\n", 25);
+	int	i;
+
+	if (state->forks)
+	{
+		i = 0;
+		while (i < state->nb_philosopher)
+			pthread_mutex_destroy(&state->forks[i++]);
+		free(state->forks);
+	}
+	if (state->philo)
+	{
+		i = 0;
+		while (i < state->nb_philosopher)
+		{
+			pthread_mutex_destroy(&state->philo[i].mutex);
+			pthread_mutex_destroy(&state->philo[i++].eat_message);
+		}
+		free(state->philo);
+	}
+	pthread_mutex_destroy(&state->message);
+	pthread_mutex_destroy(&state->state);
 	return (1);
 }
 
-int ft_checkerror(char **av)
+int	ft_error(int err_nb)
+{
+	if (err_nb == 0)
+		write(2, "Error: wrong number of arguments\n", 33);
+	else if (err_nb == 1)
+		write(2, "Error: wrong type of argument\n", 31);
+	else if (err_nb == 2)
+		write(2, "Error: negative argument\n", 25);
+	else if (err_nb == 3)
+		write(2, "Error: fatal\n", 13);
+	return (1);
+}
+
+int	ft_checkerror(char **av)
 {
 	int		i;
 

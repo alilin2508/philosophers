@@ -3,6 +3,9 @@ NAME	= philo_one
 SRCS	= main.c \
 				error.c \
 				utils.c \
+				init.c \
+				eat.c \
+				message.c \
 
 OBJS	= $(SRCS:.c=.o)
 

@@ -45,3 +45,43 @@ int ft_isdigit(char *str)
 	}
 	return (0);
 }
+
+int ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long nb;
+
+	nb = n;
+	if (nb < 0)
+	{
+		write(fd, "-", 1);
+		nb = nb * -1;
+	}
+	if (0 <= nb && nb <= 9)
+	{
+		n = '0' + nb;
+		write(fd, &n, 1);
+	}
+	else if (nb > 9)
+	{
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
+	}
+}
+
+long	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
