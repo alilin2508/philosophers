@@ -12,7 +12,7 @@ OBJS	= $(SRCS:.c=.o)
 all			:	$(NAME)
 
 $(NAME)	:	$(OBJS)
-					gcc -Wall -Wextra -Werror -o $(NAME) $(SRCS)
+					gcc -Wall -Wextra -Werror -lpthread -o $(NAME) $(SRCS)
 
 clean		:
 					rm -rf $(OBJS)

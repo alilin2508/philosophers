@@ -94,9 +94,7 @@ int main(int ac, char **av)
 	if (ac < 5 || ac > 6)
 		return (ft_error(0));
 	ft_checkerror(&av[1]);
-	if (init(&state, ac, av) == 1)
-		return (clear(&state) && ft_error(3));
-	if (start_threads(&state) == 1)
+	if (init(&state, ac, av) == 1 || start_threads(&state) == 1)
 		return (clear(&state) && ft_error(3));
 	pthread_mutex_lock(&state.state);
 	pthread_mutex_unlock(&state.state);
