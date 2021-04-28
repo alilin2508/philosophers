@@ -1,22 +1,23 @@
-#include "philo_one.h"
+#include "philo_two.h"
 
 static void	*must_eat_count(void *state)
 {
 	t_option *rstate;
 	int		i;
-	int		total;
 
 	rstate = (t_option*)state;
-	total = 0;
-	while (total < rstate->nb_time_must_eat)
+	while (rstate->current_eat_count < rstate->nb_time_must_eat)
 	{
 		i = 0;
 		while (i < rstate->nb_philosopher)
-			pthread_mutex_lock(&rstate->philo[i++].eat_message);
-		total++;
+			if (sem_wait(rstate->philo[i++].eat_message))
+				return ((void*)0);
+		rstate->current_eat_count++;
 	}
-	display_message(&rstate->philo[0], TYPE_OVER);
-	pthread_mutex_unlock(&rstate->state);
+	if (display_message(&rstate->philo[0], TYPE_OVER))
+		return ((void*)0);
+	if (sem_post(rstate->state))
+		return ((void*)0);
 	return ((void*)0);
 }
 
@@ -27,16 +28,20 @@ static void	*monitor(void *philo)
 	rphilo = (t_philo*)philo;
 	while (1)
 	{
-		pthread_mutex_lock(&rphilo->mutex);
+		if (sem_wait(rphilo->mutex))
+			return ((void*)0);
 		if (!rphilo->eating && get_time() > rphilo->limit)
 		{
-			display_message(rphilo, TYPE_DIED);
-			pthread_mutex_unlock(&rphilo->mutex);
-			pthread_mutex_unlock(&rphilo->state->state);
+			if (display_message(rphilo, TYPE_DIED))
+				return ((void*)0);
+			if (sem_post(rphilo->mutex))
+				return ((void*)0);
+			if (sem_post(rphilo->state->state))
+				return ((void*)0);
 			return ((void*)0);
 		}
-		pthread_mutex_unlock(&rphilo->mutex);
-		usleep(100);
+		if (sem_post(rphilo->mutex))
+			return ((void*)0);
 	}
 }
 
@@ -44,6 +49,7 @@ static void	*routine(void *philo)
 {
 	t_philo		*rphilo;
 	pthread_t	tid;
+	int				should_end;
 
 	rphilo = (t_philo*)philo;
 	rphilo->last_eat = get_time();
@@ -53,10 +59,15 @@ static void	*routine(void *philo)
 	pthread_detach(tid);
 	while (1)
 	{
-		take_forks(rphilo);
-		eat(rphilo);
-		put_down_forks(rphilo);
-		display_message(rphilo, TYPE_THINK);
+		if (take_forks(rphilo))
+			return ((void*)0);
+		should_end = eat(rphilo);
+		if (put_down_forks(rphilo))
+			return ((void*)0);
+		if (should_end)
+			return ((void*)0);
+		if (display_message(rphilo, TYPE_THINK))
+			return ((void*)0);
 	}
 	return ((void*)0);
 }
@@ -96,8 +107,7 @@ int main(int ac, char **av)
 	ft_checkerror(&av[1]);
 	if (init(&state, ac, av) == 1 || start_threads(&state) == 1)
 		return (clear(&state) && ft_error(3));
-	pthread_mutex_lock(&state.state);
-	pthread_mutex_unlock(&state.state);
+	sem_wait(state.state);
 	clear(&state);
 	return (0);
 }
