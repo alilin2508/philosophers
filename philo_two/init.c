@@ -12,7 +12,7 @@ int		init_semaphore(t_option *state)
 int	init_philo(t_option *state)
 {
 	int		i;
-	char	semaphore[250];
+	char	semaphore[255];
 
 	i = 0;
 	while (i < state->nb_philosopher)

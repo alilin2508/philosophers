@@ -1,45 +1,31 @@
 #include "philo_two.h"
 
-int	eat(t_philo *philo)
+void	eat(t_philo *philo)
 {
-	if (sem_wait(philo->mutex) != 0)
-		return (1);
+	sem_wait(philo->mutex);
 	philo->eating = 1;
 	philo->last_eat = get_time();
 	philo->limit = philo->last_eat + philo->state->time_to_die;
-	if (display_message(philo, TYPE_EAT))
-		return (1);
+	display_message(philo, TYPE_EAT);
 	usleep(philo->state->time_to_eat * 1000);
 	philo->eat_count++;
 	philo->eating = 0;
-	if (sem_post(philo->mutex))
-		return (1);
-	if (sem_post(philo->eat_message))
-		return (1);
-	return (0);
+	sem_post(philo->mutex);
+	sem_post(philo->eat_message);
 }
 
-int	take_forks(t_philo *philo)
+void	take_forks(t_philo *philo)
 {
-	if (sem_wait(philo->state->forks))
-		return (1);
-	if (display_message(philo, TYPE_FORK))
-		return (1);
-	if (sem_wait(philo->state->forks))
-		return (1);
-	if (display_message(philo, TYPE_FORK))
-		return (1);
-	return (0);
+	sem_wait(philo->state->forks);
+	display_message(philo, TYPE_FORK);
+	sem_wait(philo->state->forks);
+	display_message(philo, TYPE_FORK);
 }
 
-int	put_down_forks(t_philo *philo)
+void	put_down_forks(t_philo *philo)
 {
-	if (sem_post(philo->state->forks))
-		return (1);
-	if (sem_post(philo->state->forks))
-		return (1);
-	if (display_message(philo, TYPE_SLEEP))
-		return (1);
+	sem_post(philo->state->forks);
+	sem_post(philo->state->forks);
+	display_message(philo, TYPE_SLEEP);
 	usleep(philo->state->time_to_sleep * 1000);
-	return (0);
 }

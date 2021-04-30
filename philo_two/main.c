@@ -10,14 +10,11 @@ static void	*must_eat_count(void *state)
 	{
 		i = 0;
 		while (i < rstate->nb_philosopher)
-			if (sem_wait(rstate->philo[i++].eat_message))
-				return ((void*)0);
+			sem_wait(rstate->philo[i++].eat_message);
 		rstate->current_eat_count++;
 	}
-	if (display_message(&rstate->philo[0], TYPE_OVER))
-		return ((void*)0);
-	if (sem_post(rstate->state))
-		return ((void*)0);
+	display_message(&rstate->philo[0], TYPE_OVER);
+	sem_post(rstate->state);
 	return ((void*)0);
 }
 
@@ -28,28 +25,24 @@ static void	*monitor(void *philo)
 	rphilo = (t_philo*)philo;
 	while (1)
 	{
-		if (sem_wait(rphilo->mutex))
-			return ((void*)0);
+		sem_wait(rphilo->mutex);
 		if (!rphilo->eating && get_time() > rphilo->limit)
 		{
-			if (display_message(rphilo, TYPE_DIED))
-				return ((void*)0);
-			if (sem_post(rphilo->mutex))
-				return ((void*)0);
-			if (sem_post(rphilo->state->state))
-				return ((void*)0);
+			display_message(rphilo, TYPE_DIED);
+			sem_post(rphilo->mutex);
+			sem_post(rphilo->state->state);
 			return ((void*)0);
 		}
-		if (sem_post(rphilo->mutex))
-			return ((void*)0);
+		sem_post(rphilo->mutex);
+		usleep(1000);
 	}
+	return ((void*)0);
 }
 
 static void	*routine(void *philo)
 {
 	t_philo		*rphilo;
 	pthread_t	tid;
-	int				should_end;
 
 	rphilo = (t_philo*)philo;
 	rphilo->last_eat = get_time();
@@ -59,15 +52,10 @@ static void	*routine(void *philo)
 	pthread_detach(tid);
 	while (1)
 	{
-		if (take_forks(rphilo))
-			return ((void*)0);
-		should_end = eat(rphilo);
-		if (put_down_forks(rphilo))
-			return ((void*)0);
-		if (should_end)
-			return ((void*)0);
-		if (display_message(rphilo, TYPE_THINK))
-			return ((void*)0);
+		take_forks(rphilo);
+		eat(rphilo);
+		put_down_forks(rphilo);
+		display_message(rphilo, TYPE_THINK);
 	}
 	return ((void*)0);
 }
@@ -92,7 +80,7 @@ static int	start_threads(t_option *state)
 		if (pthread_create(&tid, NULL, &routine, philo) != 0)
 			return (1);
 		pthread_detach(tid);
-		usleep(10);
+		usleep(100);
 		i++;
 	}
 	return (0);

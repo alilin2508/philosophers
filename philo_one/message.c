@@ -3,16 +3,16 @@
 char	*get_message(int type)
 {
 	if (type == TYPE_EAT)
-		return (" is eating\n");
+		return (" is eating");
 	else if (type == TYPE_SLEEP)
-		return (" is sleeping\n");
+		return (" is sleeping");
 	else if (type == TYPE_FORK)
-		return (" has taken a fork\n");
+		return (" has taken a fork");
 	else if (type == TYPE_THINK)
-		return (" is thinking\n");
+		return (" is thinking");
 	else if (type == TYPE_OVER)
-		return ("number of times they must eat reached\n");
-	return (" died\n");
+		return ("number of times they must eat reached");
+	return (" died");
 }
 
 void	display_message(t_philo *philo, int type)
@@ -28,7 +28,7 @@ void	display_message(t_philo *philo, int type)
 			ft_putnbr_fd(philo->position + 1, 1);
 		if (type >= TYPE_DIED)
 			done = 1;
-		write(1, get_message(type), ft_strlen(get_message(type)));
+		printf("%s\n", get_message(type));
 	}
 	pthread_mutex_unlock(&philo->state->message);
 }

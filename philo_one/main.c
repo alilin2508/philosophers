@@ -36,8 +36,9 @@ static void	*monitor(void *philo)
 			return ((void*)0);
 		}
 		pthread_mutex_unlock(&rphilo->mutex);
-		usleep(100);
+		usleep(1000);
 	}
+	return ((void*)0);
 }
 
 static void	*routine(void *philo)
@@ -81,7 +82,7 @@ static int	start_threads(t_option *state)
 		if (pthread_create(&tid, NULL, &routine, philo) != 0)
 			return (1);
 		pthread_detach(tid);
-		usleep(10);
+		usleep(100);
 		i++;
 	}
 	return (0);
