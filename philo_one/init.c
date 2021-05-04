@@ -48,6 +48,7 @@ int init(t_option *state, int ac, char **av)
 		state->nb_time_must_eat = 0;
 	state->forks = NULL;
 	state->philo = NULL;
+	state->current_eat_count = 0;
 	if (!(state->philo =
 		(t_philo*)malloc(sizeof(*(state->philo)) * state->nb_philosopher)))
 		return (1);

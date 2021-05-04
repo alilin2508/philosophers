@@ -31,7 +31,6 @@ typedef struct		s_option
 	int							nb_time_must_eat;
 	int							current_eat_count;
 	long						start;
-	int							over;
 	struct s_philo	*philo;
 	sem_t						*forks;
 	sem_t						*message;
@@ -45,8 +44,6 @@ typedef struct		s_philo
 	int							eating;
 	long						limit;
 	long						last_eat;
-	int							left_fork;
-	int							right_fork;
 	int							eat_count;
 	sem_t						*mutex;
 	sem_t						*eat_message;

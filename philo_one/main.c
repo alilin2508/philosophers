@@ -4,16 +4,14 @@ static void	*must_eat_count(void *state)
 {
 	t_option *rstate;
 	int		i;
-	int		total;
 
 	rstate = (t_option*)state;
-	total = 0;
-	while (total < rstate->nb_time_must_eat)
+	while (rstate->current_eat_count < rstate->nb_time_must_eat)
 	{
 		i = 0;
 		while (i < rstate->nb_philosopher)
 			pthread_mutex_lock(&rstate->philo[i++].eat_message);
-		total++;
+		rstate->current_eat_count++;
 	}
 	display_message(&rstate->philo[0], TYPE_OVER);
 	pthread_mutex_unlock(&rstate->state);

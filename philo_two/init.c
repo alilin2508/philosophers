@@ -19,8 +19,6 @@ int	init_philo(t_option *state)
 	{
 		state->philo[i].position = i;
 		state->philo[i].eating = 0;
-		state->philo[i].left_fork = i;
-		state->philo[i].right_fork = (i + 1) % state->nb_philosopher;
 		state->philo[i].eat_count = 0;
 		state->philo[i].state = state;
 		make_semaphore_name(SEMAPHORE_PHILO, (char*)semaphore, i);

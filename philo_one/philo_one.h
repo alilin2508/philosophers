@@ -22,6 +22,7 @@ typedef struct		s_option
 	int							time_to_eat;
 	int							time_to_sleep;
 	int							nb_time_must_eat;
+	int							current_eat_count;
 	long						start;
 	struct s_philo	*philo;
 	pthread_mutex_t	*forks;
