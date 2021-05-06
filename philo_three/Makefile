@@ -1,4 +1,4 @@
-NAME	= philo_two
+NAME	= philo_three
 
 SRCS	= main.c \
 				error.c \
@@ -7,6 +7,7 @@ SRCS	= main.c \
 				eat.c \
 				message.c \
 				semaphore.c \
+				thread.c \
 
 OBJS	= $(SRCS:.c=.o)
 

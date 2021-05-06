@@ -1,4 +1,4 @@
-#include "philo_two.h"
+#include "philo_three.h"
 
 sem_t	*ft_sem_open(char const *name, int value)
 {

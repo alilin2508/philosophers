@@ -1,4 +1,4 @@
-#include "philo_two.h"
+#include "philo_three.h"
 
 int	clear(t_option *state)
 {
@@ -8,6 +8,7 @@ int	clear(t_option *state)
 	sem_unlink(SEMAPHORE_FORK);
 	sem_unlink(SEMAPHORE_WRITE);
 	sem_unlink(SEMAPHORE_DEAD);
+	sem_unlink(SEMAPHORE_DEADM);
 	if (state->philo)
 	{
 		i = 0;

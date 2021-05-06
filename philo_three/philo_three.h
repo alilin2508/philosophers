@@ -1,11 +1,12 @@
-#ifndef PHILO_TWO_H
-# define PHILO_TWO_H
+#ifndef PHILO_THREE_H
+# define PHILO_THREE_H
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/time.h>
 #include <semaphore.h>
 #include <pthread.h>
+#include <signal.h>
 
 # define TYPE_EAT 	0
 # define TYPE_SLEEP 1
@@ -17,6 +18,7 @@
 # define SEMAPHORE_FORK		"SemaphoreFork"
 # define SEMAPHORE_WRITE	"SemaphoreWrite"
 # define SEMAPHORE_DEAD		"SemaphoreDead"
+# define SEMAPHORE_DEADM	"SemaphoreDeadMessage"
 # define SEMAPHORE_PHILO	"SemaphorePhilo"
 # define SEMAPHORE_PHILOEAT	"SemaphorePhiloEat"
 
@@ -31,22 +33,21 @@ typedef struct		s_option
 	int							nb_time_must_eat;
 	int							current_eat_count;
 	long						start;
-	int							over;
 	struct s_philo	*philo;
 	sem_t						*forks;
 	sem_t						*message;
+	sem_t						*dead_message;
 	sem_t						*state;
 }									t_option;
 
 typedef struct		s_philo
 {
 	t_option				*state;
+	pid_t						pid;
 	int							position;
 	int							eating;
 	long						limit;
 	long						last_eat;
-	int							left_fork;
-	int							right_fork;
 	int							eat_count;
 	sem_t						*mutex;
 	sem_t						*eat_message;
@@ -71,5 +72,9 @@ void							display_message(t_philo *philo, int type);
 sem_t							*ft_sem_open(char const *name, int value);
 int								ft_strcpy(char *dst, const char *src);
 char							*make_semaphore_name(char const *base, char *buffer, int position);
+void							*must_eat_count(void *state);
+void							*monitor(void *philo);
+void							*routine(void *philo);
+int								start_threads(t_option *state);
 
 #endif
