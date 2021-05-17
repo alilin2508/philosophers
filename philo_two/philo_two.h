@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:03:20 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:16:53 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/17 11:39:37 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <sys/time.h>
+# include <fcntl.h>
 # include <semaphore.h>
 # include <pthread.h>
 

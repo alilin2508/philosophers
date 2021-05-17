@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:03:05 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:17:23 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/17 11:44:13 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	init_semaphore(t_option *state)
 {
-	if ((state->forks = ft_sem_open(SEMAPHORE_FORK, state->nb_philosopher)) < 0
-		|| (state->message = ft_sem_open(SEMAPHORE_WRITE, 1)) < 0
-		|| (state->state = ft_sem_open(SEMAPHORE_DEAD, 0)) < 0)
+	if (!(state->forks = ft_sem_open(SEMAPHORE_FORK, state->nb_philosopher))
+		|| !(state->message = ft_sem_open(SEMAPHORE_WRITE, 1))
+		|| !(state->state = ft_sem_open(SEMAPHORE_DEAD, 0)))
 		return (1);
 	return (0);
 }
@@ -34,10 +34,10 @@ int	init_philo(t_option *state)
 		state->philo[i].eat_count = 0;
 		state->philo[i].state = state;
 		make_semaphore_name(SEMAPHORE_PHILO, (char*)semaphore, i);
-		if ((state->philo[i].mutex = ft_sem_open(semaphore, 1)) < 0)
+		if (!(state->philo[i].mutex = ft_sem_open(semaphore, 1)))
 			return (1);
 		make_semaphore_name(SEMAPHORE_PHILOEAT, (char*)semaphore, i);
-		if ((state->philo[i].eat_message = ft_sem_open(semaphore, 0)) < 0)
+		if (!(state->philo[i].eat_message = ft_sem_open(semaphore, 0)))
 			return (1);
 		i++;
 	}
