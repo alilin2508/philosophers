@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:02:08 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:50:08 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/17 11:53:44 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	start_process(t_option *state)
 	i = 0;
 	while (i < state->nb_philosopher)
 	{
-		philo = (void*)(&state->philo[i]);
 		state->philo[i].pid = fork();
 		if (state->philo[i].pid < 0)
 			return (1);
