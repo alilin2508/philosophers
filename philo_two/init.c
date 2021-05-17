@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 11:03:05 by alilin            #+#    #+#             */
+/*   Updated: 2021/05/17 11:17:23 by alilin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_two.h"
 
-int		init_semaphore(t_option *state)
+int	init_semaphore(t_option *state)
 {
 	if ((state->forks = ft_sem_open(SEMAPHORE_FORK, state->nb_philosopher)) < 0
 		|| (state->message = ft_sem_open(SEMAPHORE_WRITE, 1)) < 0
@@ -32,7 +44,7 @@ int	init_philo(t_option *state)
 	return (0);
 }
 
-int init(t_option *state, int ac, char **av)
+int	init(t_option *state, int ac, char **av)
 {
 	state->nb_philosopher = ft_atoi(av[1]);
 	state->time_to_die = ft_atoi(av[2]);

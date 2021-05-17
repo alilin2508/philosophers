@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 11:01:48 by alilin            #+#    #+#             */
+/*   Updated: 2021/05/17 11:11:40 by alilin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
-int	ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
-	int		n;
-	int		i;
-	int		signe;
+	int				n;
+	int				i;
+	int				signe;
 
 	n = 0;
 	i = 0;
@@ -26,9 +38,9 @@ int	ft_atoi(const char *str)
 	return (n * signe);
 }
 
-int ft_isdigit(char *str)
+int		ft_isdigit(char *str)
 {
-	int		i;
+	int				i;
 
 	i = 0;
 	if (str[0] == '-')
@@ -46,9 +58,9 @@ int ft_isdigit(char *str)
 	return (0);
 }
 
-int ft_strlen(char *str)
+int		ft_strlen(char *str)
 {
-	int i;
+	int				i;
 
 	i = 0;
 	while (str[i])
@@ -58,7 +70,7 @@ int ft_strlen(char *str)
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long nb;
+	long			nb;
 
 	nb = n;
 	if (nb < 0)

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   thread.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 11:02:40 by alilin            #+#    #+#             */
+/*   Updated: 2021/05/17 11:27:42 by alilin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_three.h"
 
 void	*must_eat_count(void *state)
 {
-	t_option *rstate;
-	int		i;
+	t_option	*rstate;
+	int			i;
 
 	rstate = (t_option*)state;
 	while (rstate->current_eat_count < rstate->nb_time_must_eat)
@@ -60,7 +72,7 @@ void	*routine(void *philo)
 	return ((void*)0);
 }
 
-int	start_threads(t_option *state)
+int		start_threads(t_option *state)
 {
 	pthread_t	tid;
 

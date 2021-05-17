@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 11:02:01 by alilin            #+#    #+#             */
+/*   Updated: 2021/05/17 11:28:14 by alilin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_three.h"
 
-int		init_semaphore(t_option *state)
+int	init_semaphore(t_option *state)
 {
 	sem_unlink(SEMAPHORE_FORK);
 	sem_unlink(SEMAPHORE_WRITE);
@@ -39,7 +51,7 @@ int	init_philo(t_option *state)
 	return (0);
 }
 
-int init(t_option *state, int ac, char **av)
+int	init(t_option *state, int ac, char **av)
 {
 	state->nb_philosopher = ft_atoi(av[1]);
 	state->time_to_die = ft_atoi(av[2]);

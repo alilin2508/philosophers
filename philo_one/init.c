@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 11:01:12 by alilin            #+#    #+#             */
+/*   Updated: 2021/05/17 11:12:33 by alilin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
 int		init_mutex(t_option *state)
@@ -9,7 +21,8 @@ int		init_mutex(t_option *state)
 	pthread_mutex_init(&state->state, NULL);
 	pthread_mutex_lock(&state->state);
 	if (!(state->forks =
-		(pthread_mutex_t*)malloc(sizeof(*(state->forks)) * state->nb_philosopher)))
+		(pthread_mutex_t*)malloc(sizeof(*(state->forks)) *
+			state->nb_philosopher)))
 		return (1);
 	while (++i < state->nb_philosopher)
 		pthread_mutex_init(&state->forks[i], NULL);
@@ -18,7 +31,7 @@ int		init_mutex(t_option *state)
 
 void	init_philo(t_option *state)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < state->nb_philosopher)
@@ -36,7 +49,7 @@ void	init_philo(t_option *state)
 	}
 }
 
-int init(t_option *state, int ac, char **av)
+int		init(t_option *state, int ac, char **av)
 {
 	state->nb_philosopher = ft_atoi(av[1]);
 	state->time_to_die = ft_atoi(av[2]);

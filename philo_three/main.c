@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 11:02:08 by alilin            #+#    #+#             */
+/*   Updated: 2021/05/17 11:23:45 by alilin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_three.h"
 
-static int start_process(t_option *state)
+static int	start_process(t_option *state)
 {
 	int			i;
 	void		*philo;
@@ -24,10 +36,10 @@ static int start_process(t_option *state)
 	return (0);
 }
 
-int main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	t_option state;
-	int				i;
+	t_option	state;
+	int			i;
 
 	if (ac < 5 || ac > 6)
 		return (ft_error(0));

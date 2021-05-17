@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 11:01:21 by alilin            #+#    #+#             */
+/*   Updated: 2021/05/17 11:13:29 by alilin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
 static void	*must_eat_count(void *state)
 {
-	t_option *rstate;
-	int		i;
+	t_option	*rstate;
+	int			i;
 
 	rstate = (t_option*)state;
 	while (rstate->current_eat_count < rstate->nb_time_must_eat)
@@ -64,7 +76,7 @@ static int	start_threads(t_option *state)
 {
 	int			i;
 	pthread_t	tid;
-	void			*philo;
+	void		*philo;
 
 	i = 0;
 	state->start = get_time();
@@ -86,9 +98,9 @@ static int	start_threads(t_option *state)
 	return (0);
 }
 
-int main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	t_option state;
+	t_option	state;
 
 	if (ac < 5 || ac > 6)
 		return (ft_error(0));

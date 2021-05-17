@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   message.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 11:02:25 by alilin            #+#    #+#             */
+/*   Updated: 2021/05/17 11:22:07 by alilin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_three.h"
 
 char	*get_message(int type)
@@ -23,7 +35,7 @@ void	display_message(t_philo *philo, int type)
 	write(1, "\t", 1);
 	if (type != TYPE_OVER)
 		ft_putnbr_fd(philo->position + 1, 1);
-		write(1, get_message(type), ft_strlen(get_message(type)));
+	write(1, get_message(type), ft_strlen(get_message(type)));
 	if (type < TYPE_DIED)
 		sem_post(philo->state->dead_message);
 	sem_post(philo->state->message);
