@@ -6,13 +6,13 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:03:31 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:18:15 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 14:33:59 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int				n;
 	int				i;
@@ -38,7 +38,7 @@ int		ft_atoi(const char *str)
 	return (n * signe);
 }
 
-int		ft_isdigit(char *str)
+int	ft_isdigit(char *str)
 {
 	int				i;
 
@@ -58,7 +58,7 @@ int		ft_isdigit(char *str)
 	return (0);
 }
 
-int		ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int				i;
 

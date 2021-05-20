@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:02:40 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/20 11:54:54 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 15:06:07 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*must_eat_count(void *state)
 	t_option	*rstate;
 	int			i;
 
-	rstate = (t_option*)state;
+	rstate = (t_option *)state;
 	while (rstate->current_eat_count < rstate->nb_time_must_eat)
 	{
 		i = 0;
@@ -27,14 +27,14 @@ void	*must_eat_count(void *state)
 	}
 	display_message(&rstate->philo[0], TYPE_OVER);
 	sem_post(rstate->state);
-	return ((void*)0);
+	return ((void *)0);
 }
 
 void	*monitor(void *philo)
 {
 	t_philo		*rphilo;
 
-	rphilo = (t_philo*)philo;
+	rphilo = (t_philo *)philo;
 	while (1)
 	{
 		sem_wait(rphilo->mutex);
@@ -43,12 +43,12 @@ void	*monitor(void *philo)
 			display_message(rphilo, TYPE_DIED);
 			sem_post(rphilo->mutex);
 			sem_post(rphilo->state->state);
-			return ((void*)0);
+			return ((void *)0);
 		}
 		sem_post(rphilo->mutex);
 		ft_usleep(1);
 	}
-	return ((void*)0);
+	return ((void *)0);
 }
 
 void	*routine(void *philo)
@@ -56,11 +56,11 @@ void	*routine(void *philo)
 	t_philo		*rphilo;
 	pthread_t	tid;
 
-	rphilo = (t_philo*)philo;
+	rphilo = (t_philo *)philo;
 	rphilo->last_eat = get_time();
 	rphilo->limit = rphilo->last_eat + rphilo->state->time_to_die;
 	if (pthread_create(&tid, NULL, &monitor, rphilo) != 0)
-		return ((void*)1);
+		return ((void *)1);
 	pthread_detach(tid);
 	while (1)
 	{
@@ -69,16 +69,17 @@ void	*routine(void *philo)
 		put_down_forks(rphilo);
 		display_message(rphilo, TYPE_THINK);
 	}
-	return ((void*)0);
+	return ((void *)0);
 }
 
-int		start_threads(t_option *state)
+int	start_threads(t_option *state)
 {
 	pthread_t	tid;
 
+	state->start = get_time();
 	if (state->nb_time_must_eat > -1)
 	{
-		if (pthread_create(&tid, NULL, &must_eat_count, (void*)state) != 0)
+		if (pthread_create(&tid, NULL, &must_eat_count, (void *)state) != 0)
 			return (1);
 		pthread_detach(tid);
 	}

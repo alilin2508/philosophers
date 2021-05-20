@@ -6,13 +6,13 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:01:12 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/20 10:30:28 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 14:03:49 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int		init_mutex(t_option *state)
+int	init_mutex(t_option *state)
 {
 	int	i;
 
@@ -20,9 +20,9 @@ int		init_mutex(t_option *state)
 	pthread_mutex_init(&state->message, NULL);
 	pthread_mutex_init(&state->state, NULL);
 	pthread_mutex_lock(&state->state);
-	if (!(state->forks =
-		(pthread_mutex_t*)malloc(sizeof(*(state->forks)) *
-			state->nb_philosopher)))
+	state->forks = (pthread_mutex_t *)malloc(sizeof(*(state->forks))
+			* state->nb_philosopher);
+	if (!state->forks)
 		return (1);
 	while (++i < state->nb_philosopher)
 		pthread_mutex_init(&state->forks[i], NULL);
@@ -49,7 +49,7 @@ void	init_philo(t_option *state)
 	}
 }
 
-int		init(t_option *state, int ac, char **av)
+int	init(t_option *state, int ac, char **av)
 {
 	state->nb_philosopher = ft_atoi(av[1]);
 	state->time_to_die = ft_atoi(av[2]);
@@ -62,8 +62,9 @@ int		init(t_option *state, int ac, char **av)
 	state->forks = NULL;
 	state->philo = NULL;
 	state->current_eat_count = 0;
-	if (!(state->philo =
-		(t_philo*)malloc(sizeof(*(state->philo)) * state->nb_philosopher)))
+	state->philo = (t_philo *)malloc(sizeof(*(state->philo))
+			* state->nb_philosopher);
+	if (!state->philo)
 		return (1);
 	init_philo(state);
 	return (init_mutex(state));

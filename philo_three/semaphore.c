@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:02:35 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:23:09 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 14:50:59 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ sem_t	*ft_sem_open(char const *name, int value)
 	return (sem_open(name, O_CREAT | O_EXCL, 0644, value));
 }
 
-int		ft_strcpy(char *dst, const char *src)
+int	ft_strcpy(char *dst, const char *src)
 {
 	int	i;
 

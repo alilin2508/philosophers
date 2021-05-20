@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:02:30 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/20 11:48:10 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 14:50:27 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@
 # define SEMAPHORE_PHILO	"SemaphorePhilo"
 # define SEMAPHORE_PHILOEAT	"SemaphorePhiloEat"
 
-struct s_philo;
+struct	s_philo;
 
-typedef struct		s_option
+typedef struct s_option
 {
 	int				nb_philosopher;
 	int				time_to_die;
@@ -53,7 +53,7 @@ typedef struct		s_option
 	sem_t			*state;
 }					t_option;
 
-typedef struct		s_philo
+typedef struct s_philo
 {
 	t_option		*state;
 	pid_t			pid;
@@ -84,7 +84,7 @@ char				*get_message(int type);
 void				display_message(t_philo *philo, int type);
 sem_t				*ft_sem_open(char const *name, int value);
 int					ft_strcpy(char *dst, const char *src);
-char				*make_semaphore_name(char const *base, char *buffer,
+char				*make_semaphore_name(char const *base, char *buffer, \
 		int position);
 void				*must_eat_count(void *state);
 void				*monitor(void *philo);

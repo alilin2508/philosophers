@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:03:00 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:03:01 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 14:01:05 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	clear(t_option *state)
 		i = 0;
 		while (i < state->nb_philosopher)
 		{
-			make_semaphore_name(SEMAPHORE_PHILO, (char*)semaphore, i);
+			make_semaphore_name(SEMAPHORE_PHILO, (char *)semaphore, i);
 			sem_unlink(semaphore);
-			make_semaphore_name(SEMAPHORE_PHILOEAT, (char*)semaphore, i++);
+			make_semaphore_name(SEMAPHORE_PHILOEAT, (char *)semaphore, i++);
 			sem_unlink(semaphore);
 		}
 		free(state->philo);

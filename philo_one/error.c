@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:01:01 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/20 10:30:32 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 13:16:03 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_error(int err_nb)
 		write(2, "Error: negative argument\n", 25);
 	else if (err_nb == 3)
 		write(2, "Error: fatal\n", 13);
-	return(1);
+	return (1);
 }
 
 int	ft_checkerror(char **av)

@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:02:01 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/20 11:49:23 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 14:48:45 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ int	init_semaphore(t_option *state)
 	sem_unlink(SEMAPHORE_WRITE);
 	sem_unlink(SEMAPHORE_DEAD);
 	sem_unlink(SEMAPHORE_DEADM);
-	if (!(state->forks = ft_sem_open(SEMAPHORE_FORK, state->nb_philosopher))
-		|| !(state->message = ft_sem_open(SEMAPHORE_WRITE, 1))
-		|| !(state->state = ft_sem_open(SEMAPHORE_DEAD, 0))
-		|| !(state->dead_message = ft_sem_open(SEMAPHORE_DEADM, 1)))
+	state->forks = ft_sem_open(SEMAPHORE_FORK, state->nb_philosopher);
+	state->message = ft_sem_open(SEMAPHORE_WRITE, 1);
+	state->state = ft_sem_open(SEMAPHORE_DEAD, 0);
+	state->dead_message = ft_sem_open(SEMAPHORE_DEADM, 1);
+	if (!state->forks || !state->message || !state->state
+		|| !state->dead_message)
 		return (1);
 	return (0);
 }
@@ -38,13 +40,15 @@ int	init_philo(t_option *state)
 		state->philo[i].eating = 0;
 		state->philo[i].eat_count = 0;
 		state->philo[i].state = state;
-		make_semaphore_name(SEMAPHORE_PHILO, (char*)semaphore, i);
+		make_semaphore_name(SEMAPHORE_PHILO, (char *)semaphore, i);
 		sem_unlink(semaphore);
-		if (!(state->philo[i].mutex = ft_sem_open(semaphore, 1)))
+		state->philo[i].mutex = ft_sem_open(semaphore, 1);
+		if (!state->philo[i].mutex)
 			return (1);
-		make_semaphore_name(SEMAPHORE_PHILOEAT, (char*)semaphore, i);
+		make_semaphore_name(SEMAPHORE_PHILOEAT, (char *)semaphore, i);
 		sem_unlink(semaphore);
-		if (!(state->philo[i].eat_message = ft_sem_open(semaphore, 0)))
+		state->philo[i].eat_message = ft_sem_open(semaphore, 0);
+		if (!state->philo[i].eat_message)
 			return (1);
 		i++;
 	}
@@ -64,8 +68,9 @@ int	init(t_option *state, int ac, char **av)
 	state->forks = NULL;
 	state->philo = NULL;
 	state->current_eat_count = 0;
-	if (!(state->philo =
-		(t_philo*)malloc(sizeof(*(state->philo)) * state->nb_philosopher)))
+	state->philo = (t_philo *)malloc(sizeof(*(state->philo))
+			* state->nb_philosopher);
+	if (!state->philo)
 		return (1);
 	if (init_philo(state) == 1)
 		return (1);

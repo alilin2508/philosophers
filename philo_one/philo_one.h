@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:01:40 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/20 11:47:13 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 13:30:03 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # define TYPE_DIED 	4
 # define TYPE_OVER 	5
 
-struct s_philo;
+struct	s_philo;
 
-typedef struct		s_option
+typedef struct s_option
 {
 	int				nb_philosopher;
 	int				time_to_die;
@@ -42,7 +42,7 @@ typedef struct		s_option
 	pthread_mutex_t	state;
 }					t_option;
 
-typedef struct		s_philo
+typedef struct s_philo
 {
 	t_option		*state;
 	int				position;
