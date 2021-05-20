@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:02:08 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:53:44 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 11:50:07 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	start_process(t_option *state)
 			routine(&state->philo[i]);
 			exit(0);
 		}
-		usleep(100);
+		ft_usleep(1 / 10);
 		i++;
 	}
 	return (0);
@@ -41,7 +41,8 @@ int			main(int ac, char **av)
 
 	if (ac < 5 || ac > 6)
 		return (ft_error(0));
-	ft_checkerror(&av[1]);
+	if (ft_checkerror(&av[1]))
+		return (1);
 	if (init(&state, ac, av) == 1 || start_threads(&state) == 1
 	|| start_process(&state) == 1)
 		return (clear(&state) && ft_error(3));

@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:01:12 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:12:33 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 10:30:28 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		init(t_option *state, int ac, char **av)
 	if (ac == 6)
 		state->nb_time_must_eat = ft_atoi(av[5]);
 	else
-		state->nb_time_must_eat = 0;
+		state->nb_time_must_eat = -1;
 	state->forks = NULL;
 	state->philo = NULL;
 	state->current_eat_count = 0;

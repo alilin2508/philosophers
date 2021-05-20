@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:02:30 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:45:41 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 11:48:10 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ void				*must_eat_count(void *state);
 void				*monitor(void *philo);
 void				*routine(void *philo);
 int					start_threads(t_option *state);
+void				ft_usleep(long ms);
 
 #endif

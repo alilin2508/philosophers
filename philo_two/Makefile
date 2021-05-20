@@ -7,6 +7,7 @@ SRCS	= main.c \
 				eat.c \
 				message.c \
 				semaphore.c \
+				utils2.c
 
 OBJS	= $(SRCS:.c=.o)
 

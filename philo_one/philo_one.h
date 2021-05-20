@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:01:40 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:09:33 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 11:47:13 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void				ft_putnbr_fd(int n, int fd);
 long				get_time(void);
 char				*get_message(int type);
 void				display_message(t_philo *philo, int type);
+void				ft_usleep(long ms);
 
 #endif

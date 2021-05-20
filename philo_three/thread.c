@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:02:40 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:27:42 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 11:54:54 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*monitor(void *philo)
 			return ((void*)0);
 		}
 		sem_post(rphilo->mutex);
-		usleep(1000);
+		ft_usleep(1);
 	}
 	return ((void*)0);
 }
@@ -76,7 +76,7 @@ int		start_threads(t_option *state)
 {
 	pthread_t	tid;
 
-	if (state->nb_time_must_eat > 0)
+	if (state->nb_time_must_eat > -1)
 	{
 		if (pthread_create(&tid, NULL, &must_eat_count, (void*)state) != 0)
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:03:20 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:39:37 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 11:48:04 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ sem_t				*ft_sem_open(char const *name, int value);
 int					ft_strcpy(char *dst, const char *src);
 char				*make_semaphore_name(char const *base, char *buffer,
 		int position);
+void				ft_usleep(long ms);
 
 #endif

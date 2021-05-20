@@ -6,6 +6,7 @@ SRCS	= main.c \
 				init.c \
 				eat.c \
 				message.c \
+				utils2.c
 
 OBJS	= $(SRCS:.c=.o)
 

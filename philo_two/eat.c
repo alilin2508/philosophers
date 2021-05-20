@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:02:51 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:02:52 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 11:50:55 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	eat(t_philo *philo)
 	philo->last_eat = get_time();
 	philo->limit = philo->last_eat + philo->state->time_to_die;
 	display_message(philo, TYPE_EAT);
-	usleep(philo->state->time_to_eat * 1000);
+	ft_usleep(philo->state->time_to_eat);
 	philo->eat_count++;
 	philo->eating = 0;
 	sem_post(philo->mutex);
@@ -39,5 +39,5 @@ void	put_down_forks(t_philo *philo)
 	sem_post(philo->state->forks);
 	sem_post(philo->state->forks);
 	display_message(philo, TYPE_SLEEP);
-	usleep(philo->state->time_to_sleep * 1000);
+	ft_usleep(philo->state->time_to_sleep);
 }

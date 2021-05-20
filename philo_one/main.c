@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:01:21 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/17 11:13:29 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/20 11:50:14 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	*monitor(void *philo)
 			return ((void*)0);
 		}
 		pthread_mutex_unlock(&rphilo->mutex);
-		usleep(1000);
+		ft_usleep(1);
 	}
 	return ((void*)0);
 }
@@ -80,7 +80,7 @@ static int	start_threads(t_option *state)
 
 	i = 0;
 	state->start = get_time();
-	if (state->nb_time_must_eat > 0)
+	if (state->nb_time_must_eat > -1)
 	{
 		if (pthread_create(&tid, NULL, &must_eat_count, (void*)state) != 0)
 			return (1);
@@ -92,7 +92,7 @@ static int	start_threads(t_option *state)
 		if (pthread_create(&tid, NULL, &routine, philo) != 0)
 			return (1);
 		pthread_detach(tid);
-		usleep(100);
+		ft_usleep(1 / 10);
 		i++;
 	}
 	return (0);
@@ -104,7 +104,8 @@ int			main(int ac, char **av)
 
 	if (ac < 5 || ac > 6)
 		return (ft_error(0));
-	ft_checkerror(&av[1]);
+	if (ft_checkerror(&av[1]))
+		return (1);
 	if (init(&state, ac, av) == 1 || start_threads(&state) == 1)
 		return (clear(&state) && ft_error(3));
 	pthread_mutex_lock(&state.state);
