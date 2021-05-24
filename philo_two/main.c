@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:03:10 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/20 15:08:22 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/24 16:15:28 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	start_threads(t_option *state)
 		if (pthread_create(&tid, NULL, &routine, philo) != 0)
 			return (1);
 		pthread_detach(tid);
-		ft_usleep(1 / 10);
+		ft_usleep(1);
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: alilin <alilin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:02:08 by alilin            #+#    #+#             */
-/*   Updated: 2021/05/20 15:10:06 by alilin           ###   ########.fr       */
+/*   Updated: 2021/05/24 16:18:32 by alilin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	start_process(t_option *state)
 			routine(&state->philo[i]);
 			exit(0);
 		}
-		ft_usleep(1 / 10);
+		ft_usleep(1);
 		i++;
 	}
 	return (0);
